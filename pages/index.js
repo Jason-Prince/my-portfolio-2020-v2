@@ -87,6 +87,24 @@ const Project = styled.div`
   grid-template-columns: 1fr;
   gap: 15px;
 `;
+
+const push = keyframes`
+  0% {
+    opacity: 0;
+  }
+
+  33% {
+    opacity: 1;
+    transform: translateY(-30px);
+  }
+  66% {
+    transform: translateY(30px);
+  }
+  100% {
+    opacity: 1;
+  }
+`;
+
 const List = styled.div`
   display: flex;
   flex-direction: row;
@@ -102,6 +120,56 @@ const ListItem = styled.div`
   font-weight: 600;
   border: 1px solid ${({ theme }) => theme.colors.ming};
   padding: 1px 3px 0px 3px;
+  opacity: 0;
+  animation: ${push} 2s forwards;
+  animation-delay: ${(props) =>
+    props.d1
+      ? ".1s"
+      : props.d2
+      ? ".2s"
+      : props.d3
+      ? ".3s"
+      : props.d4
+      ? ".4s"
+      : props.d5
+      ? ".5s"
+      : props.d6
+      ? ".6s"
+      : props.d7
+      ? ".7s"
+      : props.d8
+      ? ".8s"
+      : props.d9
+      ? ".9s"
+      : props.d10
+      ? "1.0s"
+      : props.d11
+      ? "1.1s"
+      : props.d12
+      ? "1.2s"
+      : props.d13
+      ? "1.3s"
+      : props.d14
+      ? "1.4s"
+      : props.d15
+      ? "1.5s"
+      : props.d16
+      ? "1.6s"
+      : props.d17
+      ? "1.7s"
+      : props.d18
+      ? "1.8s"
+      : props.d19
+      ? "1.9s"
+      : props.d20
+      ? "2.0s"
+      : props.d21
+      ? "2.1s"
+      : props.d22
+      ? "2.2s"
+      : props.d23
+      ? "2.3s"
+      : "0"};
 `;
 
 const LinkContainer = styled.div`
@@ -123,29 +191,29 @@ export default function Home() {
           <Underline>Full Stack Web Developer</Underline>
         </Title>
         <List banner>
-          <ListItem>HTML</ListItem>
-          <ListItem>CSS </ListItem>
-          <ListItem>Sass</ListItem>
-          <ListItem>Styled Components</ListItem>
-          <ListItem>JavaScript</ListItem>
-          <ListItem>Python</ListItem>
-          <ListItem>React</ListItem>
-          <ListItem>Next JS</ListItem>
-          <ListItem>Knex JS</ListItem>
-          <ListItem>Git</ListItem>
-          <ListItem>GitHub</ListItem>
-          <ListItem>Material UI</ListItem>
-          <ListItem>Bootstrap</ListItem>
-          <ListItem>React Hooks</ListItem>
-          <ListItem>Express</ListItem>
-          <ListItem>Django</ListItem>
-          <ListItem>Node JS</ListItem>
-          <ListItem>SQLite3</ListItem>
-          <ListItem>MySQL</ListItem>
-          <ListItem>Netlify</ListItem>
-          <ListItem>Heroku</ListItem>
-          <ListItem>Algorithms</ListItem>
-          <ListItem>Data Structures</ListItem>
+          <ListItem d1>CSS </ListItem>
+          <ListItem d2>HTML</ListItem>
+          <ListItem d3>Sass</ListItem>
+          <ListItem d4>Styled Components</ListItem>
+          <ListItem d5>JavaScript</ListItem>
+          <ListItem d6>Python</ListItem>
+          <ListItem d7>React</ListItem>
+          <ListItem d8>Next JS</ListItem>
+          <ListItem d9>Knex JS</ListItem>
+          <ListItem d10>Git</ListItem>
+          <ListItem d11>GitHub</ListItem>
+          <ListItem d12>Material UI</ListItem>
+          <ListItem d13>Bootstrap</ListItem>
+          <ListItem d14>React Hooks</ListItem>
+          <ListItem d15>Express</ListItem>
+          <ListItem d16>Django</ListItem>
+          <ListItem d17>Node JS</ListItem>
+          <ListItem d18>SQLite3</ListItem>
+          <ListItem d19>MySQL</ListItem>
+          <ListItem d20>Netlify</ListItem>
+          <ListItem d21>Heroku</ListItem>
+          <ListItem d22>Algorithms</ListItem>
+          <ListItem d23>Data Structures</ListItem>
         </List>
         <Button lg href="#contact" rel="noopener">
           Let's Talk
