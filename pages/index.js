@@ -1,21 +1,11 @@
 import styled, { keyframes } from "styled-components";
 
 const Section = styled.section`
-  background-color: ${({ sectionOne, sectionTwo }) =>
-    sectionOne
-      ? ({ theme }) => theme.colors.indigoDye
-      : sectionTwo
-      ? ({ theme }) => theme.colors.gainsboro
-      : ({ theme }) => theme.colors.white};
-  color: ${({ sectionOne, sectionTwo }) =>
-    sectionOne
-      ? ({ theme }) => theme.colors.gainsboro
-      : sectionTwo
-      ? ({ theme }) => theme.colors.indigoDye
-      : ({ theme }) => theme.colors.jet};
+  background-color: ${({ theme }) => theme.colors.gainsboro};
+  color: ${({ theme }) => theme.colors.indigoDye};
   padding: 3rem;
   display: grid;
-  gap: 3rem;
+  gap: 8rem;
   justify-items: center;
 `;
 
@@ -32,8 +22,15 @@ const Title = styled.h1`
   font-weight: bold;
 `;
 
+const fadein = keyframes`
+  100% {
+    opacity: 1;
+  }
+`;
+
 const Button = styled.a`
   display: inline;
+  opacity: 0;
   border-radius: 0.5rem;
   text-decoration: none;
   text-align: center;
@@ -49,6 +46,7 @@ const Button = styled.a`
     background-color: ${({ theme }) => theme.colors.indigoDye};
     color: ${({ theme }) => theme.colors.white};
   }
+  animation: ${fadein} 1s 4s ease-in forwards;
 `;
 
 const P = styled.p`
@@ -87,6 +85,16 @@ const Project = styled.div`
   display: grid;
   grid-template-columns: 1fr;
   gap: 15px;
+  max-width: 1024px;
+  @media (min-width: 768px) {
+    grid-template-columns: 1fr 1fr;
+    gap: 35px;
+  }
+`;
+const Details = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
 `;
 
 const Contact = styled.section`
@@ -96,6 +104,11 @@ const Contact = styled.section`
   grid-template-rows: repeat(2, 1fr);
   text-align: center;
   gap: 12px;
+  max-width: 1024px;
+  @media (min-width: 768px) {
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: 1fr;
+  }
 `;
 
 const Footer = styled.section`
@@ -210,42 +223,139 @@ const Svg = styled.svg`
   }
 `;
 
+const Banner = styled.section`
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+  max-width: 1024px;
+`;
+
+const point = keyframes`
+  25% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+`;
+
+const CheveronContainer = styled.div`
+  display: flex;
+`;
+
+const Chevron = styled.svg`
+  animation: ${point} 4s ease-in-out infinite;
+  animation-delay: ${({ first, second, third, fourth }) =>
+    first ? "6s" : second ? "7s" : third ? "8s" : fourth ? "9s" : "10s"};
+  animation-duration: ${({ first, second, third, fourth }) =>
+    first ? "4s" : second ? "4.5s" : third ? "5s" : fourth ? "5.5s" : "6s"};
+  width: 40px;
+  opacity: 0;
+  transform: translateY(-60px);
+`;
+
 export default function Home() {
   return (
     <>
-      <Section sectionTwo>
-        <Title>
-          Hey! I'm Jason. I Can Be Your{" "}
-          <Underline>Full-Stack Web Developer</Underline>
-        </Title>
-        <List banner>
-          <ListItem d1>CSS </ListItem>
-          <ListItem d2>HTML</ListItem>
-          <ListItem d3>Sass</ListItem>
-          <ListItem d4>Styled Components</ListItem>
-          <ListItem d5>JavaScript</ListItem>
-          <ListItem d6>Python</ListItem>
-          <ListItem d7>React</ListItem>
-          <ListItem d8>Next JS</ListItem>
-          <ListItem d9>Knex JS</ListItem>
-          <ListItem d10>Git</ListItem>
-          <ListItem d11>GitHub</ListItem>
-          <ListItem d12>Material UI</ListItem>
-          <ListItem d13>Bootstrap</ListItem>
-          <ListItem d14>React Hooks</ListItem>
-          <ListItem d15>Express</ListItem>
-          <ListItem d16>Django</ListItem>
-          <ListItem d17>Node JS</ListItem>
-          <ListItem d18>SQLite3</ListItem>
-          <ListItem d19>MySQL</ListItem>
-          <ListItem d20>Netlify</ListItem>
-          <ListItem d21>Heroku</ListItem>
-          <ListItem d22>Algorithms</ListItem>
-          <ListItem d23>Data Structures</ListItem>
-        </List>
-        <Button lg href="#contact" rel="noopener">
-          Let's Talk
-        </Button>
+      <Section>
+        <Banner>
+          <Title>
+            Hey! I'm Jason. I Can Be Your{" "}
+            <Underline>Full-Stack Web Developer</Underline>
+          </Title>
+          <List banner>
+            <ListItem d1>CSS </ListItem>
+            <ListItem d2>HTML</ListItem>
+            <ListItem d3>Sass</ListItem>
+            <ListItem d4>Styled Components</ListItem>
+            <ListItem d5>JavaScript</ListItem>
+            <ListItem d6>Python</ListItem>
+            <ListItem d7>React</ListItem>
+            <ListItem d8>Next JS</ListItem>
+            <ListItem d9>Knex JS</ListItem>
+            <ListItem d10>Git</ListItem>
+            <ListItem d11>GitHub</ListItem>
+            <ListItem d12>Material UI</ListItem>
+            <ListItem d13>Bootstrap</ListItem>
+            <ListItem d14>React Hooks</ListItem>
+            <ListItem d15>Express</ListItem>
+            <ListItem d16>Django</ListItem>
+            <ListItem d17>Node JS</ListItem>
+            <ListItem d18>SQLite3</ListItem>
+            <ListItem d19>MySQL</ListItem>
+            <ListItem d20>Netlify</ListItem>
+            <ListItem d21>Heroku</ListItem>
+            <ListItem d22>Algorithms</ListItem>
+            <ListItem d23>Data Structures</ListItem>
+          </List>
+          <Button lg href="#contact" rel="noopener">
+            Let's Talk
+          </Button>
+          <CheveronContainer>
+            <Chevron
+              second
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="4"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <polyline points="6 9 12 15 18 9"></polyline>
+            </Chevron>
+            <Chevron
+              first
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="4"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <polyline points="6 9 12 15 18 9"></polyline>
+            </Chevron>
+            <Chevron
+              fourth
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="4"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <polyline points="6 9 12 15 18 9"></polyline>
+            </Chevron>
+            <Chevron
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="4"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <polyline points="6 9 12 15 18 9"></polyline>
+            </Chevron>
+            <Chevron
+              third
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="4"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <polyline points="6 9 12 15 18 9"></polyline>
+            </Chevron>
+          </CheveronContainer>
+        </Banner>
         <P>
           I have 20 years of experience in Information Technology with a
           Bachelor of Information Technology and a Secret security clearance
@@ -262,95 +372,101 @@ export default function Home() {
         <Image square src="jason.png" alt="Jason Prince"></Image>
         <Project>
           <Image src="reciepeEditor.png" alt="Reciepe Editor"></Image>
-          <H3>Cooking With React</H3>
-          <List>
-            <ListItem>JavaScript</ListItem>
-            <ListItem>React </ListItem>
-            <ListItem>React Hooks</ListItem>
-            <ListItem>CSS</ListItem>
-            <ListItem>CSS Grid</ListItem>
-            <ListItem>BEM</ListItem>
-          </List>
-          <P>This app provides a form to create, edit, or remove recipes.</P>
-          <List>
-            <ExternalLink
-              md
-              href="https://reciepes.netlify.app/"
-              target="_blank"
-            >
-              Live Demo
-            </ExternalLink>
-            <ExternalLink
-              md
-              href="https://github.com/Jason-Prince/Cooking-With-React"
-              target="_blank"
-            >
-              Github Repo
-            </ExternalLink>
-          </List>
+          <Details>
+            <H3>Cooking With React</H3>
+            <List>
+              <ListItem>JavaScript</ListItem>
+              <ListItem>React </ListItem>
+              <ListItem>React Hooks</ListItem>
+              <ListItem>CSS</ListItem>
+              <ListItem>CSS Grid</ListItem>
+              <ListItem>BEM</ListItem>
+            </List>
+            <P>This app provides a form to create, edit, or remove recipes.</P>
+            <List>
+              <ExternalLink
+                md
+                href="https://reciepes.netlify.app/"
+                target="_blank"
+              >
+                Live Demo
+              </ExternalLink>
+              <ExternalLink
+                md
+                href="https://github.com/Jason-Prince/Cooking-With-React"
+                target="_blank"
+              >
+                Github Repo
+              </ExternalLink>
+            </List>
+          </Details>
         </Project>
         <Project>
+          <Details>
+            <H3>Pixabay Image Search</H3>
+            <List>
+              <ListItem>JavaScript</ListItem>
+              <ListItem>React </ListItem>
+              <ListItem>React Hooks</ListItem>
+              <ListItem>Fetch</ListItem>
+              <ListItem>CSS</ListItem>
+              <ListItem>CSS Grid</ListItem>
+              <ListItem>Tailwind</ListItem>
+            </List>
+            <P>
+              This app allows a user to enter a search term in the Pixabay image
+              gallery and produces a list of images and all the data associated
+              with it.
+            </P>
+            <List>
+              <ExternalLink
+                md
+                href="https://image-search-pixabay.netlify.app/"
+                target="_blank"
+              >
+                Live Demo
+              </ExternalLink>
+              <ExternalLink
+                md
+                href="https://github.com/Jason-Prince/image-gallery"
+                target="_blank"
+              >
+                Github Repo
+              </ExternalLink>
+            </List>
+          </Details>
           <Image src="pixabay.png" alt="Pixabay Image Search"></Image>
-          <H3>Pixabay Image Search</H3>
-          <List>
-            <ListItem>JavaScript</ListItem>
-            <ListItem>React </ListItem>
-            <ListItem>React Hooks</ListItem>
-            <ListItem>Fetch</ListItem>
-            <ListItem>CSS</ListItem>
-            <ListItem>CSS Grid</ListItem>
-            <ListItem>Tailwind</ListItem>
-          </List>
-          <P>
-            This app allows a user to enter a search term in the Pixabay image
-            gallery and produces a list of images and all the data associated
-            with it.
-          </P>
-          <List>
-            <ExternalLink
-              md
-              href="https://image-search-pixabay.netlify.app/"
-              target="_blank"
-            >
-              Live Demo
-            </ExternalLink>
-            <ExternalLink
-              md
-              href="https://github.com/Jason-Prince/image-gallery"
-              target="_blank"
-            >
-              Github Repo
-            </ExternalLink>
-          </List>
         </Project>
         <Project>
           <Image src="portfolio.png" alt="portfolio"></Image>
-          <H3>Web Portfolio</H3>
-          <List>
-            <ListItem>JavaScript</ListItem>
-            <ListItem>Next JS </ListItem>
-            <ListItem>CSS</ListItem>
-            <ListItem>CSS Grid</ListItem>
-            <ListItem>Styled Components</ListItem>
-            <ListItem>Vercel</ListItem>
-            <ListItem>Mobile First</ListItem>
-          </List>
-          <P>
-            Usefull resource for clients and employers who want to know me,
-            contact me and see live demos and repositors of my projects.
-          </P>
-          <List>
-            <ExternalLink md href="http://jason-prince.com" target="_blank">
-              Live Demo
-            </ExternalLink>
-            <ExternalLink
-              md
-              href="https://github.com/Jason-Prince/my-portfolio-2020-v2"
-              target="_blank"
-            >
-              Github Repo
-            </ExternalLink>
-          </List>
+          <Details>
+            <H3>Web Portfolio</H3>
+            <List>
+              <ListItem>JavaScript</ListItem>
+              <ListItem>Next JS </ListItem>
+              <ListItem>CSS</ListItem>
+              <ListItem>CSS Grid</ListItem>
+              <ListItem>Styled Components</ListItem>
+              <ListItem>Vercel</ListItem>
+              <ListItem>Mobile First</ListItem>
+            </List>
+            <P>
+              Usefull resource for clients and employers who want to know me,
+              contact me and see live demos and repositors of my projects.
+            </P>
+            <List>
+              <ExternalLink md href="http://jason-prince.com" target="_blank">
+                Live Demo
+              </ExternalLink>
+              <ExternalLink
+                md
+                href="https://github.com/Jason-Prince/my-portfolio-2020-v2"
+                target="_blank"
+              >
+                Github Repo
+              </ExternalLink>
+            </List>
+          </Details>
         </Project>
         <Contact id="contact">
           <SvgLink
