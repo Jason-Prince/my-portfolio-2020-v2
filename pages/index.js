@@ -3,17 +3,16 @@ import styled, { keyframes } from "styled-components";
 const Section = styled.section`
   background-color: ${({ theme }) => theme.colors.gainsboro};
   color: ${({ theme }) => theme.colors.indigoDye};
-  padding: 3rem;
   display: grid;
   gap: 8rem;
   justify-items: center;
+  align-items: center;
+  width: 100%;
 `;
-
 const Underline = styled.span`
   border-bottom: 4px solid white;
   padding-bottom: 2px;
 `;
-
 const Title = styled.h1`
   font-size: 2rem;
   text-align: center;
@@ -21,13 +20,11 @@ const Title = styled.h1`
   padding: 0;
   font-weight: bold;
 `;
-
 const fadein = keyframes`
   100% {
     opacity: 1;
   }
 `;
-
 const Button = styled.a`
   display: inline;
   opacity: 0;
@@ -47,15 +44,24 @@ const Button = styled.a`
     color: ${({ theme }) => theme.colors.white};
   }
   animation: ${fadein} 1s 4s ease-in forwards;
+  z-index: 1;
 `;
-
 const P = styled.p`
   margin-top: 0;
   margin-bottom: 0;
   font-size: 1.2rem;
 `;
-
+const AboutProject = styled.p`
+  grid-area: aboutproject;
+  margin-top: 0;
+  margin-bottom: 0;
+  font-size: 1.2rem;
+  text-align: center;
+`;
 const ExternalLink = styled.a`
+  grid-area: ${({ demo, repo }) => (demo ? "demo" : repo ? "repo" : "")};
+  justify-self: ${({ demo, repo }) =>
+    demo ? "start" : repo ? "end" : "center"};
   display: inline;
   text-decoration: underline ${({ theme }) => theme.colors.indigoDye};
   color: ${({ theme }) => theme.colors.indigoDye};
@@ -71,30 +77,53 @@ const SvgLink = styled.a`
   font-weight: 600;
 `;
 
-const Image = styled.img`
-  width: ${({ square }) => (square ? "12rem" : "100%")};
+const Project = styled.div`
+  height: 50vh;
+  max-width: 1430px;
+  justify-items: center;
+  align-items: center;
+  padding: 0 3em;
+  gap: 2em;
+  display: grid;
+  grid-template-columns: 310px;
+  grid-template-rows: 1fr 1fr;
+  grid-template-areas:
+    "screenshot"
+    "details";
+  @media (min-width: 1115px) {
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 370px;
+    gap: 15px;
+  }
+`;
+
+const ScreenShot = styled.img`
+  grid-area: screenshot;
+  width: 85%;
   border-radius: 0.5rem;
   box-shadow: 0 2.8px 2.2px rgba(0, 0, 0, 0.034),
     0 6.7px 5.3px rgba(0, 0, 0, 0.048), 0 12.5px 10px rgba(0, 0, 0, 0.06),
     0 22.3px 17.9px rgba(0, 0, 0, 0.072), 0 41.8px 33.4px rgba(0, 0, 0, 0.086),
     0 100px 80px rgba(0, 0, 0, 0.12);
-`;
-
-const Project = styled.div`
-  width: 100%;
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 15px;
-  max-width: 1024px;
   @media (min-width: 768px) {
-    grid-template-columns: 1fr 1fr;
-    gap: 35px;
+    width: 100%;
   }
 `;
+
 const Details = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
+  grid-area: details;
+  justify-items: center;
+  align-items: center;
+  padding: 0 3em;
+  gap: 1em;
+  display: grid;
+  grid-template-columns: 310px;
+  grid-template-rows: repeat(4, auto);
+  grid-template-areas:
+    "projecttitle"
+    "skilllist"
+    "aboutproject"
+    "linklist";
 `;
 
 const Contact = styled.section`
@@ -110,14 +139,12 @@ const Contact = styled.section`
     grid-template-rows: 1fr;
   }
 `;
-
 const Footer = styled.section`
   width: 100%;
   display: grid;
   text-align: center;
   font-size: 0.6rem;
 `;
-
 const push = keyframes`
   0% {
     opacity: 0;
@@ -134,15 +161,38 @@ const push = keyframes`
     opacity: 1;
   }
 `;
-
 const List = styled.div`
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
   gap: 10px;
-  justify-content: ${({ banner }) => (banner ? "center" : "start")};
+  justify-content: ${({ center, spaceAround }) =>
+    center ? "center" : spaceAround ? "space-around" : "start"};
 `;
-
+const SkillList = styled.div`
+  grid-area: skilllist;
+  display: flex;
+  gap: 5px;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: ${({ center, spaceAround }) =>
+    center ? "center" : spaceAround ? "space-around" : "start"};
+`;
+// const LinkList = styled.div`
+//   grid-area: linklist;
+//   display: flex;
+//   gap: 5px;
+//   flex-direction: row;
+//   flex-wrap: wrap;
+// `;
+const LinkList = styled.div`
+  grid-area: linklist;
+  padding: 0 3em;
+  display: grid;
+  grid-template-columns: repeat(2, 155px);
+  grid-template-rows: auto;
+  grid-template-areas: "demo repo";
+`;
 const ListItem = styled.div`
   display: inline;
   color: ${({ theme }) => theme.colors.ming};
@@ -201,12 +251,11 @@ const ListItem = styled.div`
       ? "2.3s"
       : "0"};
 `;
-
-const H3 = styled.h3`
+const ProjectTitle = styled.h3`
+  grid-area: projecttitle;
   font-size: 1.5rem;
   margin: 0;
 `;
-
 const Svg = styled.svg`
   fill: ${({ theme }) => theme.colors.indigoDye};
   width: 50px;
@@ -222,7 +271,6 @@ const Svg = styled.svg`
       noLink ? "${({ theme }) => theme.colors.gainsboro}" : "white"};
   }
 `;
-
 const Banner = styled.section`
   height: 100vh;
   display: flex;
@@ -231,30 +279,72 @@ const Banner = styled.section`
   justify-content: space-evenly;
   max-width: 1024px;
 `;
-
 const point = keyframes`
   25% {
     opacity: 1;
   }
   50% {
     opacity: 0;
-    transform: translateY(30px);
+    transform: translateY(150px);
   }
 `;
-
 const CheveronContainer = styled.div`
   display: flex;
 `;
-
 const Chevron = styled.svg`
   animation: ${point} 4s ease-in-out infinite;
   animation-delay: ${({ first, second, third, fourth }) =>
-    first ? "6s" : second ? "7s" : third ? "8s" : fourth ? "9s" : "10s"};
+    first ? "7s" : second ? "13s" : third ? "17s" : fourth ? "11s" : "5s"};
   animation-duration: ${({ first, second, third, fourth }) =>
-    first ? "4s" : second ? "4.5s" : third ? "5s" : fourth ? "5.5s" : "6s"};
+    first ? "11s" : second ? "17s" : third ? "19s" : fourth ? "11s" : "13s"};
   width: 40px;
   opacity: 0;
-  transform: translateY(-60px);
+  transform: translateY(-150px);
+  z-index: 0;
+`;
+
+const AboutContainer = styled.div`
+  height: 50vh;
+  max-width: 1430px;
+  justify-items: center;
+  align-items: center;
+  gap: 2em;
+  display: grid;
+  grid-template-columns: 350px;
+  grid-template-rows: 1fr 1fr;
+  grid-template-areas:
+    "myphoto"
+    "myinfo";
+  @media (min-width: 768px) {
+    grid-template-columns: 1fr 2fr;
+    grid-template-rows: 1fr;
+    grid-template-areas: "myphoto myinfo";
+    gap: 2em;
+    padding: 0 3em;
+  }
+`;
+const MyInfo = styled.p`
+  grid-area: myinfo;
+  font-size: 1.3rem;
+  text-align: center;
+  margin: 0;
+  padding: 0;
+  @media (min-width: 768px) {
+    text-align: left;
+  } ;
+`;
+const MyPhoto = styled.img`
+  grid-area: myphoto;
+  width: 70%;
+  border-radius: 0.5rem;
+  box-shadow: 0 2.8px 2.2px rgba(0, 0, 0, 0.034),
+    0 6.7px 5.3px rgba(0, 0, 0, 0.048), 0 12.5px 10px rgba(0, 0, 0, 0.06),
+    0 22.3px 17.9px rgba(0, 0, 0, 0.072), 0 41.8px 33.4px rgba(0, 0, 0, 0.086),
+    0 100px 80px rgba(0, 0, 0, 0.12);
+  @media (min-width: 768px) {
+    text-align: left;
+    width: 100%;
+  }
 `;
 
 export default function Home() {
@@ -266,7 +356,7 @@ export default function Home() {
             Hey! I'm Jason. I Can Be Your{" "}
             <Underline>Full-Stack Web Developer</Underline>
           </Title>
-          <List banner>
+          <List center>
             <ListItem d1>CSS </ListItem>
             <ListItem d2>HTML</ListItem>
             <ListItem d3>Sass</ListItem>
@@ -356,35 +446,40 @@ export default function Home() {
             </Chevron>
           </CheveronContainer>
         </Banner>
-        <P>
-          I have 20 years of experience in Information Technology with a
-          Bachelor of Information Technology and a Secret security clearance
-          with the Department of Defense. Recently, I completed the Full Stack
-          Web Development track at{" "}
-          <ExternalLink
-            target="_blank"
-            href="https://lambdaschool.com/courses/full-stack-web-development"
-          >
-            Lambda School
-          </ExternalLink>
-          .
-        </P>
-        <Image square src="jason.png" alt="Jason Prince"></Image>
+        <AboutContainer>
+          <MyInfo>
+            I have 20 years of experience in Information Technology with a
+            Bachelor of Information Technology and a Secret security clearance
+            with the Department of Defense. Recently, I completed the Full Stack
+            Web Development track at{" "}
+            <ExternalLink
+              target="_blank"
+              href="https://lambdaschool.com/courses/full-stack-web-development"
+            >
+              Lambda School
+            </ExternalLink>
+            .
+          </MyInfo>
+          <MyPhoto src="jason.png" alt="Jason Prince"></MyPhoto>
+        </AboutContainer>
         <Project>
-          <Image src="reciepeEditor.png" alt="Reciepe Editor"></Image>
+          <ScreenShot src="reciepeEditor.png" alt="Reciepe Editor"></ScreenShot>
           <Details>
-            <H3>Cooking With React</H3>
-            <List>
+            <ProjectTitle>Cooking With React</ProjectTitle>
+            <SkillList center>
               <ListItem>JavaScript</ListItem>
               <ListItem>React </ListItem>
               <ListItem>React Hooks</ListItem>
               <ListItem>CSS</ListItem>
               <ListItem>CSS Grid</ListItem>
               <ListItem>BEM</ListItem>
-            </List>
-            <P>This app provides a form to create, edit, or remove recipes.</P>
-            <List>
+            </SkillList>
+            <AboutProject>
+              This app provides a form to create, edit, or remove recipes.
+            </AboutProject>
+            <LinkList>
               <ExternalLink
+                demo
                 md
                 href="https://reciepes.netlify.app/"
                 target="_blank"
@@ -392,19 +487,20 @@ export default function Home() {
                 Live Demo
               </ExternalLink>
               <ExternalLink
+                repo
                 md
                 href="https://github.com/Jason-Prince/Cooking-With-React"
                 target="_blank"
               >
                 Github Repo
               </ExternalLink>
-            </List>
+            </LinkList>
           </Details>
         </Project>
         <Project>
-          <Details>
-            <H3>Pixabay Image Search</H3>
-            <List>
+          <Details order2>
+            <ProjectTitle>Pixabay Image Search</ProjectTitle>
+            <SkillList center>
               <ListItem>JavaScript</ListItem>
               <ListItem>React </ListItem>
               <ListItem>React Hooks</ListItem>
@@ -412,14 +508,15 @@ export default function Home() {
               <ListItem>CSS</ListItem>
               <ListItem>CSS Grid</ListItem>
               <ListItem>Tailwind</ListItem>
-            </List>
-            <P>
+            </SkillList>
+            <AboutProject>
               This app allows a user to enter a search term in the Pixabay image
               gallery and produces a list of images and all the data associated
               with it.
-            </P>
-            <List>
+            </AboutProject>
+            <LinkList>
               <ExternalLink
+                demo
                 md
                 href="https://image-search-pixabay.netlify.app/"
                 target="_blank"
@@ -427,21 +524,22 @@ export default function Home() {
                 Live Demo
               </ExternalLink>
               <ExternalLink
+                repo
                 md
                 href="https://github.com/Jason-Prince/image-gallery"
                 target="_blank"
               >
                 Github Repo
               </ExternalLink>
-            </List>
+            </LinkList>
           </Details>
-          <Image src="pixabay.png" alt="Pixabay Image Search"></Image>
+          <ScreenShot src="pixabay.png" alt="Pixabay Image Search"></ScreenShot>
         </Project>
         <Project>
-          <Image src="portfolio.png" alt="portfolio"></Image>
+          <ScreenShot src="portfolio.png" alt="portfolio"></ScreenShot>
           <Details>
-            <H3>Web Portfolio</H3>
-            <List>
+            <ProjectTitle>Web Portfolio</ProjectTitle>
+            <SkillList center>
               <ListItem>JavaScript</ListItem>
               <ListItem>Next JS </ListItem>
               <ListItem>CSS</ListItem>
@@ -449,23 +547,29 @@ export default function Home() {
               <ListItem>Styled Components</ListItem>
               <ListItem>Vercel</ListItem>
               <ListItem>Mobile First</ListItem>
-            </List>
-            <P>
+            </SkillList>
+            <AboutProject>
               Usefull resource for clients and employers who want to know me,
               contact me and see live demos and repositors of my projects.
-            </P>
-            <List>
-              <ExternalLink md href="http://jason-prince.com" target="_blank">
+            </AboutProject>
+            <LinkList>
+              <ExternalLink
+                demo
+                md
+                href="http://jason-prince.com"
+                target="_blank"
+              >
                 Live Demo
               </ExternalLink>
               <ExternalLink
+                repo
                 md
                 href="https://github.com/Jason-Prince/my-portfolio-2020-v2"
                 target="_blank"
               >
                 Github Repo
               </ExternalLink>
-            </List>
+            </LinkList>
           </Details>
         </Project>
         <Contact id="contact">
