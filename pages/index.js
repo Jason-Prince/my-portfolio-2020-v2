@@ -1,5 +1,35 @@
 import styled, { keyframes } from "styled-components";
 
+const push = keyframes`
+  0% {
+    opacity: 0;
+  }
+
+  33% {
+    opacity: 1;
+    transform: translateY(-30px);
+  }
+  66% {
+    transform: translateY(30px);
+  }
+  100% {
+    opacity: 1;
+  }
+`;
+const point = keyframes`
+  50% {
+    opacity: 1;
+    transform: translateY(0px);
+  }
+`;
+const fadein = keyframes`
+
+
+  100% {
+    opacity: 1;
+  }
+`;
+
 const Section = styled.section`
   background-color: ${({ theme }) => theme.colors.gainsboro};
   color: ${({ theme }) => theme.colors.indigoDye};
@@ -19,11 +49,6 @@ const Title = styled.h1`
   margin: 0;
   padding: 0;
   font-weight: bold;
-`;
-const fadein = keyframes`
-  100% {
-    opacity: 1;
-  }
 `;
 const Button = styled.a`
   display: inline;
@@ -45,11 +70,6 @@ const Button = styled.a`
   }
   animation: ${fadein} 1s 4s ease-in forwards;
   z-index: 1;
-`;
-const P = styled.p`
-  margin-top: 0;
-  margin-bottom: 0;
-  font-size: 1.2rem;
 `;
 const AboutProject = styled.p`
   grid-area: aboutproject;
@@ -94,7 +114,6 @@ const SvgLink = styled.a`
   color: ${({ theme }) => theme.colors.indigoDye};
   font-weight: 600;
 `;
-
 const Project = styled.div`
   height: 60vh;
   max-width: 1430px;
@@ -108,12 +127,6 @@ const Project = styled.div`
     "screenshot"
     "details";
   @media (min-width: 768px) {
-    /* height: 50vh; */
-    /* grid-template-columns: minmax(auto, 22em) minmax(22em, 1fr) 1fr; */
-    /* grid-template-rows: 1fr; */
-    /* grid-template-areas: "myphoto myinfo ."; */
-    /* gap: 2em; */
-    /* padding: 0 3em; */
     gap: 2em;
     height: 50vh;
     padding: 0 3em;
@@ -138,7 +151,6 @@ const Project = styled.div`
       cook ? "end" : pixabay ? "start" : portfolio ? "end" : "center"};
   }
 `;
-
 const ScreenShot = styled.img`
   grid-area: screenshot;
   /* width: 85%; */
@@ -200,23 +212,8 @@ const Footer = styled.section`
   font-size: 1rem;
   padding-bottom: 2em;
 `;
-const push = keyframes`
-  0% {
-    opacity: 0;
-  }
-
-  33% {
-    opacity: 1;
-    transform: translateY(-30px);
-  }
-  66% {
-    transform: translateY(30px);
-  }
-  100% {
-    opacity: 1;
-  }
-`;
 const List = styled.div`
+  max-width: 750px;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
@@ -334,35 +331,26 @@ const Svg = styled.svg`
   }
 `;
 const Banner = styled.section`
+  max-width: 1430px;
   height: 100vh;
-  display: flex;
-  flex-direction: column;
+  gap: 6em;
+  padding-top: 6em;
+  display: grid;
+  justify-items: center;
   align-items: center;
-  justify-content: space-evenly;
-  max-width: 1024px;
-`;
-const point = keyframes`
-  25% {
-    opacity: 1;
-  }
-  50% {
-    opacity: 0;
-    transform: translateY(200px);
+  grid-template-columns: 1fr;
+  grid-template-rows: auto auto auto 1fr;
+  @media (min-width: 768px) {
+    gap: 12em;
   }
 `;
-const CheveronContainer = styled.div`
-  display: flex;
-`;
-const Chevron = styled.svg`
-  animation: ${point} 4s ease-in-out infinite;
-  animation-delay: ${({ first, second, third, fourth }) =>
-    first ? "7s" : second ? "13s" : third ? "17s" : fourth ? "11s" : "5s"};
-  animation-duration: ${({ first, second, third, fourth }) =>
-    first ? "11s" : second ? "17s" : third ? "19s" : fourth ? "11s" : "13s"};
-  width: 40px;
+const Arrow = styled.svg`
+  fill: ${({ theme }) => theme.colors.indigoDye};
+  width: 50px;
   opacity: 0;
-  transform: translateY(-200px);
-  z-index: 0;
+  transform: translateY(-100px);
+  animation: ${fadein} 4s 5s ease-in forwards,
+    ${point} 4s 5 s cubic-bezier(0.6, -0.28, 0.74, 0.05) infinite;
 `;
 
 const AboutContainer = styled.div`
@@ -453,67 +441,14 @@ export default function Home() {
           <Button lg href="#contact" rel="noopener">
             Let's Talk
           </Button>
-          <CheveronContainer>
-            <Chevron
-              second
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="4"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            >
-              <polyline points="6 9 12 15 18 9"></polyline>
-            </Chevron>
-            <Chevron
-              first
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="4"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            >
-              <polyline points="6 9 12 15 18 9"></polyline>
-            </Chevron>
-            <Chevron
-              fourth
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="4"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            >
-              <polyline points="6 9 12 15 18 9"></polyline>
-            </Chevron>
-            <Chevron
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="4"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            >
-              <polyline points="6 9 12 15 18 9"></polyline>
-            </Chevron>
-            <Chevron
-              third
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="4"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            >
-              <polyline points="6 9 12 15 18 9"></polyline>
-            </Chevron>
-          </CheveronContainer>
+          <Arrow viewBox="0 0 512 512">
+            <path
+              d="M374.108,373.328c-7.829-7.792-20.492-7.762-28.284,0.067L276,443.557V20c0-11.046-8.954-20-20-20
+			c-11.046,0-20,8.954-20,20v423.558l-69.824-70.164c-7.792-7.829-20.455-7.859-28.284-0.067c-7.83,7.793-7.859,20.456-0.068,28.285
+			l104,104.504c0.006,0.007,0.013,0.012,0.019,0.018c7.792,7.809,20.496,7.834,28.314,0.001c0.006-0.007,0.013-0.012,0.019-0.018
+			l104-104.504C381.966,393.785,381.939,381.121,374.108,373.328z"
+            />
+          </Arrow>
         </Banner>
         <AboutContainer>
           <MyInfo>

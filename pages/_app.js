@@ -1,19 +1,5 @@
-import { createGlobalStyle, ThemeProvider } from "styled-components";
-
-const GlobalStyle = createGlobalStyle`
-  body {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-  }
-  .link {
-    text-decoration: underline #457B9D;
-    color: #1D3557;
-  }
-  .textBlue {
-    color: #457B9D;
-  }
-`;
+import { ThemeProvider } from "styled-components";
+import "./_app.css";
 
 // https://coolors.co/palettes/popular
 const theme = {
@@ -29,7 +15,6 @@ const theme = {
 export default function App({ Component, pageProps }) {
   return (
     <>
-      <GlobalStyle />
       <ThemeProvider theme={theme}>
         <Component {...pageProps} />
       </ThemeProvider>
