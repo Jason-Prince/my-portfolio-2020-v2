@@ -108,8 +108,14 @@ const Project = styled.div`
     "screenshot"
     "details";
   @media (min-width: 768px) {
-    height: 50vh;
+    /* height: 50vh; */
+    /* grid-template-columns: minmax(auto, 22em) minmax(22em, 1fr) 1fr; */
+    /* grid-template-rows: 1fr; */
+    /* grid-template-areas: "myphoto myinfo ."; */
+    /* gap: 2em; */
+    /* padding: 0 3em; */
     gap: 2em;
+    height: 50vh;
     padding: 0 3em;
     grid-template-columns: ${({ cook, pixabay, portfolio }) =>
       cook
@@ -135,7 +141,8 @@ const Project = styled.div`
 
 const ScreenShot = styled.img`
   grid-area: screenshot;
-  width: 85%;
+  /* width: 85%; */
+  width: 100%;
   border-radius: 0.5rem;
   align-self: end;
   box-shadow: 0 2.8px 2.2px rgba(0, 0, 0, 0.034),
@@ -394,14 +401,13 @@ const MyInfo = styled.p`
 const MyPhoto = styled.img`
   grid-area: myphoto;
   align-self: end;
-  width: 70%;
+  width: 100%;
   border-radius: 0.5rem;
   box-shadow: 0 2.8px 2.2px rgba(0, 0, 0, 0.034),
     0 6.7px 5.3px rgba(0, 0, 0, 0.048), 0 12.5px 10px rgba(0, 0, 0, 0.06),
     0 22.3px 17.9px rgba(0, 0, 0, 0.072), 0 41.8px 33.4px rgba(0, 0, 0, 0.086),
     0 100px 80px rgba(0, 0, 0, 0.12);
   @media (min-width: 768px) {
-    width: 100%;
     align-self: center;
   }
 `;
@@ -523,7 +529,7 @@ export default function Home() {
             </ExternalLink>
             .
           </MyInfo>
-          <MyPhoto src="jason.png" alt="Jason Prince"></MyPhoto>
+          <MyPhoto src="jason-prince.jpg" alt="Jason Prince"></MyPhoto>
         </AboutContainer>
         <Project cook>
           <ScreenShot src="reciepeEditor.png" alt="Reciepe Editor"></ScreenShot>
