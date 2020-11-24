@@ -255,7 +255,7 @@ const LinkList = styled.div`
 const ListItem = styled.div`
   display: inline;
   color: ${({ theme }) => theme.colors.ming};
-  font-size: 0.75rem;
+  font-size: 1rem;
   font-weight: 600;
   border: 1px solid ${({ theme }) => theme.colors.ming};
   padding: 1px 3px 0px 3px;
@@ -333,26 +333,20 @@ const Svg = styled.svg`
 const Banner = styled.section`
   max-width: 1430px;
   height: 100vh;
-  gap: 6em;
-  padding-top: 6em;
   display: grid;
   justify-items: center;
   align-items: center;
   grid-template-columns: 1fr;
-  grid-template-rows: auto auto auto 1fr;
-  @media (min-width: 768px) {
-    gap: 12em;
-  }
+  grid-template-rows: 1fr 1fr 1fr 1fr;
 `;
 const Arrow = styled.svg`
   fill: ${({ theme }) => theme.colors.indigoDye};
   width: 50px;
   opacity: 0;
-  transform: translateY(-100px);
+  transform: translateY(98px);
   animation: ${fadein} 4s 5s ease-in forwards,
-    ${point} 4s 5 s cubic-bezier(0.6, -0.28, 0.74, 0.05) infinite;
+    ${point} 4s 5s cubic-bezier(0.6, -0.28, 0.74, 0.05) infinite;
 `;
-
 const AboutContainer = styled.div`
   height: 60vh;
   max-width: 1430px;
@@ -399,7 +393,6 @@ const MyPhoto = styled.img`
     align-self: center;
   }
 `;
-
 const SvgLabel = styled.div`
   font-size: 1.5rem;
 `;
