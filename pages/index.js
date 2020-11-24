@@ -1,5 +1,7 @@
 import styled, { keyframes } from "styled-components";
-
+/*--------------
+    keyframes
+------------- */
 const push = keyframes`
   0% {
     opacity: 0;
@@ -30,6 +32,29 @@ const fadein = keyframes`
   }
 `;
 
+/*--------------
+    Shared
+------------- */
+const ExternalLink = styled.a`
+  grid-area: ${({ demo, repo }) => (demo ? "demo" : repo ? "repo" : "")};
+  justify-self: ${({ demo, repo }) =>
+    demo ? "start" : repo ? "end" : "center"};
+  display: inline;
+  text-decoration: underline ${({ theme }) => theme.colors.indigoDye};
+  color: ${({ theme }) => theme.colors.indigoDye};
+  font-weight: 600;
+  &:hover {
+    text-decoration: underline ${({ theme }) => theme.colors.white};
+  }
+  @media (min-width: 768px) {
+    justify-self: ${({ cook, pixabay, portfolio }) =>
+      cook ? "end" : pixabay ? "start" : portfolio ? "end" : "center"};
+  }
+`;
+
+/*--------------
+    Main Container
+------------- */
 const Section = styled.section`
   background-color: ${({ theme }) => theme.colors.gainsboro};
   color: ${({ theme }) => theme.colors.indigoDye};
@@ -39,16 +64,26 @@ const Section = styled.section`
   align-items: center;
   width: 100%;
 `;
-const Underline = styled.span`
-  border-bottom: 4px solid white;
-  padding-bottom: 2px;
+
+/*--------------
+    Banner
+------------- */
+const Banner = styled.section`
+  max-width: 1430px;
+  height: 100vh;
+  display: grid;
+  justify-items: center;
+  align-items: center;
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr 1fr 1fr 1fr;
 `;
-const Title = styled.h1`
-  font-size: 2rem;
-  text-align: center;
-  margin: 0;
-  padding: 0;
-  font-weight: bold;
+const Arrow = styled.svg`
+  fill: ${({ theme }) => theme.colors.indigoDye};
+  width: 50px;
+  opacity: 0;
+  transform: translateY(98px);
+  animation: ${fadein} 4s 5s ease-in forwards,
+    ${point} 4s 5s cubic-bezier(0.6, -0.28, 0.74, 0.05) infinite;
 `;
 const Button = styled.a`
   display: inline;
@@ -71,49 +106,80 @@ const Button = styled.a`
   animation: ${fadein} 1s 4s ease-in forwards;
   z-index: 1;
 `;
-const AboutProject = styled.p`
-  grid-area: aboutproject;
-  margin-top: 0;
-  margin-bottom: 0;
-  font-size: 1.2rem;
+const Title = styled.h1`
+  font-size: 2rem;
   text-align: center;
+  margin: 0;
+  padding: 0;
+  font-weight: bold;
+`;
+const List = styled.div`
+  max-width: 750px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: ${({ center, spaceAround }) =>
+    center ? "center" : spaceAround ? "space-around" : "start"};
+`;
+const Underline = styled.span`
+  border-bottom: 4px solid white;
+  padding-bottom: 2px;
+`;
+
+/*--------------
+    About Me
+------------- */
+const AboutContainer = styled.div`
+  height: 60vh;
+  max-width: 1430px;
+  justify-items: center;
+  align-items: center;
+  gap: 2em;
+  display: grid;
+  grid-template-columns: 350px;
+  grid-template-rows: 1fr 1fr;
+  grid-template-areas:
+    "myphoto"
+    "myinfo";
   @media (min-width: 768px) {
-    text-align: ${({ cook, pixabay, portfolio }) =>
-      cook ? "right" : pixabay ? "left" : portfolio ? "right" : "center"};
+    height: 50vh;
+    grid-template-columns: minmax(auto, 22em) minmax(22em, 1fr) 1fr;
+    grid-template-rows: 1fr;
+    grid-template-areas: "myphoto myinfo .";
+    gap: 2em;
+    padding: 0 3em;
   }
 `;
-const ExternalLink = styled.a`
-  grid-area: ${({ demo, repo }) => (demo ? "demo" : repo ? "repo" : "")};
-  justify-self: ${({ demo, repo }) =>
-    demo ? "start" : repo ? "end" : "center"};
-  display: inline;
-  text-decoration: underline ${({ theme }) => theme.colors.indigoDye};
-  color: ${({ theme }) => theme.colors.indigoDye};
-  font-weight: 600;
-  &:hover {
-    text-decoration: underline ${({ theme }) => theme.colors.white};
-  }
+const MyInfo = styled.p`
+  grid-area: myinfo;
+  font-size: 1.3rem;
+  text-align: center;
+  margin: 0;
+  padding: 0;
+  align-self: start;
   @media (min-width: 768px) {
-    justify-self: ${({ cook, pixabay, portfolio }) =>
-      cook ? "end" : pixabay ? "start" : portfolio ? "end" : "center"};
+    text-align: left;
+    align-self: center;
+  } ;
+`;
+const MyPhoto = styled.img`
+  grid-area: myphoto;
+  align-self: end;
+  width: 100%;
+  border-radius: 0.5rem;
+  box-shadow: 0 2.8px 2.2px rgba(0, 0, 0, 0.034),
+    0 6.7px 5.3px rgba(0, 0, 0, 0.048), 0 12.5px 10px rgba(0, 0, 0, 0.06),
+    0 22.3px 17.9px rgba(0, 0, 0, 0.072), 0 41.8px 33.4px rgba(0, 0, 0, 0.086),
+    0 100px 80px rgba(0, 0, 0, 0.12);
+  @media (min-width: 768px) {
+    align-self: center;
   }
 `;
-const SvgLink = styled.a`
-  grid-area: ${({ linkedin, github, phone, email }) =>
-    linkedin
-      ? "linkedin"
-      : github
-      ? "github"
-      : phone
-      ? "phone"
-      : email
-      ? "email"
-      : ""};
-  display: inline;
-  text-decoration: none;
-  color: ${({ theme }) => theme.colors.indigoDye};
-  font-weight: 600;
-`;
+
+/*--------------
+    Projects
+------------- */
 const Project = styled.div`
   height: 60vh;
   max-width: 1430px;
@@ -190,36 +256,10 @@ const Details = styled.div`
       cook ? "end" : pixabay ? "start" : portfolio ? "end" : ""};
   }
 `;
-const Contact = styled.section`
-  height: 100vh;
-  max-width: 1024px;
-  text-align: center;
-  justify-items: center;
-  align-items: center;
-  display: grid;
-  grid-template-columns: 1fr;
-  grid-template-rows: repeat(4, 1fr);
-  grid-template-areas:
-    "linkedin"
-    "github"
-    "phone"
-    "email";
-`;
-const Footer = styled.section`
-  width: 100%;
-  display: grid;
-  text-align: center;
-  font-size: 1rem;
-  padding-bottom: 2em;
-`;
-const List = styled.div`
-  max-width: 750px;
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  gap: 10px;
-  justify-content: ${({ center, spaceAround }) =>
-    center ? "center" : spaceAround ? "space-around" : "start"};
+const ProjectTitle = styled.h3`
+  grid-area: projecttitle;
+  font-size: 1.5rem;
+  margin: 0;
 `;
 const SkillList = styled.div`
   grid-area: skilllist;
@@ -232,24 +272,6 @@ const SkillList = styled.div`
   @media (min-width: 768px) {
     justify-content: ${({ cook, pixabay, portfolio }) =>
       cook ? "end" : pixabay ? "start" : portfolio ? "end" : "center"};
-  }
-`;
-const LinkList = styled.div`
-  grid-area: linklist;
-  padding: 0 3em;
-  display: grid;
-  grid-template-columns: repeat(2, 155px);
-  grid-template-rows: auto;
-  grid-template-areas: "demo repo";
-  @media (min-width: 768px) {
-    padding: 0;
-    grid-template-columns: 1fr;
-    grid-template-rows: 1fr 1fr;
-    grid-template-areas:
-      "demo"
-      "repo";
-    align-items: center;
-    justify-items: end;
   }
 `;
 const ListItem = styled.div`
@@ -310,10 +332,69 @@ const ListItem = styled.div`
       ? "2.3s"
       : "0"};
 `;
-const ProjectTitle = styled.h3`
-  grid-area: projecttitle;
-  font-size: 1.5rem;
-  margin: 0;
+const AboutProject = styled.p`
+  grid-area: aboutproject;
+  margin-top: 0;
+  margin-bottom: 0;
+  font-size: 1.2rem;
+  text-align: center;
+  @media (min-width: 768px) {
+    text-align: ${({ cook, pixabay, portfolio }) =>
+      cook ? "right" : pixabay ? "left" : portfolio ? "right" : "center"};
+  }
+`;
+const LinkList = styled.div`
+  grid-area: linklist;
+  padding: 0 3em;
+  display: grid;
+  grid-template-columns: repeat(2, 155px);
+  grid-template-rows: auto;
+  grid-template-areas: "demo repo";
+  @media (min-width: 768px) {
+    padding: 0;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 1fr;
+    grid-template-areas:
+      "demo"
+      "repo";
+    align-items: center;
+    justify-items: end;
+  }
+`;
+
+/*--------------
+    Contact
+------------- */
+const Contact = styled.section`
+  height: 100vh;
+  max-width: 1024px;
+  text-align: center;
+  justify-items: center;
+  align-items: center;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: repeat(4, 1fr);
+  grid-template-areas:
+    "linkedin"
+    "github"
+    "phone"
+    "email";
+`;
+const SvgLink = styled.a`
+  grid-area: ${({ linkedin, github, phone, email }) =>
+    linkedin
+      ? "linkedin"
+      : github
+      ? "github"
+      : phone
+      ? "phone"
+      : email
+      ? "email"
+      : ""};
+  display: inline;
+  text-decoration: none;
+  color: ${({ theme }) => theme.colors.indigoDye};
+  font-weight: 600;
 `;
 const Svg = styled.svg`
   fill: ${({ theme }) => theme.colors.indigoDye};
@@ -330,71 +411,19 @@ const Svg = styled.svg`
       noLink ? "${({ theme }) => theme.colors.gainsboro}" : "white"};
   }
 `;
-const Banner = styled.section`
-  max-width: 1430px;
-  height: 100vh;
-  display: grid;
-  justify-items: center;
-  align-items: center;
-  grid-template-columns: 1fr;
-  grid-template-rows: 1fr 1fr 1fr 1fr;
-`;
-const Arrow = styled.svg`
-  fill: ${({ theme }) => theme.colors.indigoDye};
-  width: 50px;
-  opacity: 0;
-  transform: translateY(98px);
-  animation: ${fadein} 4s 5s ease-in forwards,
-    ${point} 4s 5s cubic-bezier(0.6, -0.28, 0.74, 0.05) infinite;
-`;
-const AboutContainer = styled.div`
-  height: 60vh;
-  max-width: 1430px;
-  justify-items: center;
-  align-items: center;
-  gap: 2em;
-  display: grid;
-  grid-template-columns: 350px;
-  grid-template-rows: 1fr 1fr;
-  grid-template-areas:
-    "myphoto"
-    "myinfo";
-  @media (min-width: 768px) {
-    height: 50vh;
-    grid-template-columns: minmax(auto, 22em) minmax(22em, 1fr) 1fr;
-    grid-template-rows: 1fr;
-    grid-template-areas: "myphoto myinfo .";
-    gap: 2em;
-    padding: 0 3em;
-  }
-`;
-const MyInfo = styled.p`
-  grid-area: myinfo;
-  font-size: 1.3rem;
-  text-align: center;
-  margin: 0;
-  padding: 0;
-  align-self: start;
-  @media (min-width: 768px) {
-    text-align: left;
-    align-self: center;
-  } ;
-`;
-const MyPhoto = styled.img`
-  grid-area: myphoto;
-  align-self: end;
-  width: 100%;
-  border-radius: 0.5rem;
-  box-shadow: 0 2.8px 2.2px rgba(0, 0, 0, 0.034),
-    0 6.7px 5.3px rgba(0, 0, 0, 0.048), 0 12.5px 10px rgba(0, 0, 0, 0.06),
-    0 22.3px 17.9px rgba(0, 0, 0, 0.072), 0 41.8px 33.4px rgba(0, 0, 0, 0.086),
-    0 100px 80px rgba(0, 0, 0, 0.12);
-  @media (min-width: 768px) {
-    align-self: center;
-  }
-`;
 const SvgLabel = styled.div`
   font-size: 1.5rem;
+`;
+
+/*--------------
+    Footer
+------------- */
+const Footer = styled.section`
+  width: 100%;
+  display: grid;
+  text-align: center;
+  font-size: 1rem;
+  padding-bottom: 2em;
 `;
 
 export default function Home() {

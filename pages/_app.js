@@ -1,5 +1,6 @@
 import { ThemeProvider } from "styled-components";
 import "./_app.css";
+import Head from "next/head";
 
 // https://coolors.co/palettes/popular
 const theme = {
@@ -15,6 +16,9 @@ const theme = {
 export default function App({ Component, pageProps }) {
   return (
     <>
+      <Head>
+        <link rel="icon" href="favicon.svg" />
+      </Head>
       <ThemeProvider theme={theme}>
         <Component {...pageProps} />
       </ThemeProvider>
